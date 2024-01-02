@@ -67,17 +67,33 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::latest()->get();
+        return view('backend.product.edit', compact('categories', 'product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $input = Product::find($id);
+        $input->category_id = $request->category_id;
+        $input->name = $request->name;
+        $input->price = $request->price;
+        $input->quantity = $request->quantity;
+
+        if ($image = $request->file('image')) {
+            @unlink($input->image);
+            $destinationPath = 'upload/';
+            $productImage = date('YmdHis') . '.' . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $productImage);
+            $input->image = $destinationPath . $productImage;
+        }
+        $input->save();
+        return redirect()->back();
     }
 
     /**

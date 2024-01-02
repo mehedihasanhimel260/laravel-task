@@ -42,7 +42,7 @@
             </div>
 
             <div class="bg-secondary rounded p-4">
-                <h6 class="mb-4">Category Table</h6>
+                <h6 class="mb-4">Product Table</h6>
                 <table class="table">
                     <thead>
                         <tr class="text-center">
