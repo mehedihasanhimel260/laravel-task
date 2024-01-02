@@ -1,7 +1,7 @@
 @extends('backend.layout')
 @section('content')
     <div class="container-fluid pt-4 px-4">
-        <div class="row vh-100 bg-secondary rounded  justify-content-center mx-0">
+        <div class="row  bg-secondary rounded  justify-content-center mx-0">
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded  p-4">
                     <h6 class="mb-4">Create product</h6>
@@ -63,20 +63,16 @@
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('products.edit', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
-                                            <a href="#" class="btn btn-primary" onclick="hit(event)">Delete </a>
 
-                                            <form id="delete-form" action="{{ route('products.destroy', $item->id) }}"
-                                                method="POST" class="d-none">
+
+                                            <form action="{{ route('products.destroy', $item->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
+                                                <button type="submit" class="btn btn-primary">Delete
+                                                </button>
                                             </form>
 
-                                            <script>
-                                                function hit(event) {
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form').submit();
-                                                }
-                                            </script>
+
                                         </div>
                                     </form>
                                 </td>

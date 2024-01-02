@@ -40,9 +40,9 @@ class ProductController extends Controller
 
         if ($image = $request->file('image')) {
             $destinationPath = 'upload/';
-            $categoryImage = date('YmdHis') . '.' . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $categoryImage);
-            $input->image = $destinationPath . $categoryImage;
+            $productImage = date('YmdHis') . '.' . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $productImage);
+            $input->image = $destinationPath . $productImage;
         }
         $input->save();
 
@@ -86,9 +86,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-
+        @unlink($product->image);
         $product->delete();
-
         return redirect()->back();
     }
 }
