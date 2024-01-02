@@ -20,8 +20,8 @@
             <a href="{{ route('admin.home') }}"
                 class="nav-item nav-link {{ Request::routeIs('admin.home') ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="{{ route('categories.index') }}"
-                class="nav-item nav-link  {{ Request::routeIs('categories.index') ? 'active' : '' }}"><i
+            <a href="{{ route('category.index') }}"
+                class="nav-item nav-link  {{ Request::routeIs('category.index') ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Categories</a>
             <a href="{{ route('products.index') }}"
                 class="nav-item nav-link  {{ Request::routeIs('products.index') ? 'active' : '' }}"><i

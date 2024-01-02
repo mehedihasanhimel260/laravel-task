@@ -4,16 +4,16 @@
         <div class="row vh-100 bg-secondary rounded  justify-content-center mx-0">
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded  p-4">
-                    <h6 class="mb-4">Create Category</h6>
-                    <form action="{{ route('products.store') }}" method="POST">
+                    <h6 class="mb-4">Create product</h6>
+                    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label"> Title</label>
-                            <input type="text" class="form-control" name="title" id="title"
+                            <input type="text" class="form-control" name="name" id="title"
                                 aria-describedby="title">
                         </div>
                         <div class="mb-3">
-                            <label for="category" class="form-label"> Parent Category Name</label>
+                            <label for="category" class="form-label"> Category Name</label>
                             <select class="form-select mb-3" aria-label="Default select example" name="category_id">
                                 <option selected="">Open Parent Category Name</option>
                                 @foreach ($categories as $item)
@@ -22,17 +22,20 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="Description" class="form-label"> Description</label>
-                            <textarea id="myTextarea" name="description" class="form-control" placeholder="Leave a Description here"
-                                id="floatingTextarea"></textarea>
+                            <label for="title" class="form-label"> quantity</label>
+                            <input type="number" class="form-control" name="quantity" id="title"
+                                aria-describedby="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label"> price</label>
+                            <input type="number" class="form-control" name="price" id="title"
+                                aria-describedby="title">
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label"> Image</label>
-                            <input type="file" name="image" id="category" class="form-control bg-dark"
-                                aria-describedby="category" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                            <input type="file" name="image" class="form-control bg-dark">
                         </div>
-                        <div class="mb-3">
-                            <img id="file-ip-1-preview">
+
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
@@ -44,15 +47,17 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">#</th>
+                            <th scope="col">Poduct Name</th>
                             <th scope="col">Category Name</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $item)
+                        @foreach ($products as $item)
                             <tr class="text-center">
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->category->name }}</td>
                                 <td>
                                     <form action="">
                                         <div class="btn-group" role="group">

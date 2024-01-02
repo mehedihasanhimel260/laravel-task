@@ -5,7 +5,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded  p-4">
                     <h6 class="mb-4">Create Category</h6>
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('category.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="categoryName" class="form-label">Category Name</label>
@@ -35,23 +35,15 @@
                                 <td>
                                     <form action="">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                            <a href="{{ route('category.edit', $category->id) }}"
                                                 class="btn btn-primary">Edit</a>
-                                            <a href="#" class="btn btn-primary" onclick="hit(event)">Delete
-                                            </a>
 
-                                            <form id="delete-form" action="{{ route('categories.destroy', $category->id) }}"
-                                                method="POST" class="d-none">
+                                            <form action="{{ route('category.destroy', $category->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
+                                                <button type="submit" class="btn btn-primary">Delete </button>
                                             </form>
 
-                                            <script>
-                                                function hit(event) {
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form').submit();
-                                                }
-                                            </script>
 
 
                                         </div>

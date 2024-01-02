@@ -5,7 +5,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded  p-4">
                     <h6 class="mb-4">Create Category</h6>
-                    <form action="{{ route('categories.update', $categories->id) }}" method="POST"
+                    <form action="{{ route('category.update', $categories->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @method('PUT')
                         @csrf

@@ -8,6 +8,7 @@ then:<br>
 php artisan key:generate<br>
 then:<br>
 npm run dev<br>
+php artisan queue:listen<br>
 php artisan migrate:refresh --path='./database/migrations/2023_12_16_044934_create_rounds_table.php' <br>
 php artisan route:list --name=player-ranking<br>
 php artisan optimize:clear<br>

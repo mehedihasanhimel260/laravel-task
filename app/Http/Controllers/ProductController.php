@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,8 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::latest()->get();
         $categories = Category::latest()->get();
-        return view('backend.product.index',compact('categories'));
+        return view('backend.product.index', compact('categories', 'products'));
     }
 
     /**
@@ -30,7 +32,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = new Product();
+        $input->category_id = $request->category_id;
+        $input->name = $request->name;
+        $input->price = $request->price;
+        $input->quantity = $request->quantity;
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'upload/';
+            $categoryImage = date('YmdHis') . '.' . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $categoryImage);
+            $input->image = $destinationPath . $categoryImage;
+        }
+        $input->save();
+
+        $maildata = [
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+        ];
+        SendEmailJob::dispatch($maildata);
+
+        return redirect()->back();
     }
 
     /**
@@ -60,8 +83,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->delete();
+
+        return redirect()->back();
     }
 }
