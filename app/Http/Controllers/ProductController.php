@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->get();
-        return view('backend.category.index', compact('categories'));
+        return view('backend.product.index',compact('categories'));
     }
 
     /**
@@ -29,14 +30,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect()->back();
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Product $product)
     {
         //
     }
@@ -44,29 +44,24 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $categories = Category::find($id);
-        return view('backend.category.edit', compact('categories'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $Category = Category::find($id);
-        $Category->update($request->all());
-        return redirect()->back();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->back();
+        //
     }
 }

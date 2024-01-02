@@ -5,13 +5,34 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded  p-4">
                     <h6 class="mb-4">Create Category</h6>
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('products.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="categoryName" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" name="name" id="categoryName"
-                                aria-describedby="Category">
+                            <label for="title" class="form-label"> Title</label>
+                            <input type="text" class="form-control" name="title" id="title"
+                                aria-describedby="title">
                         </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label"> Parent Category Name</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="category_id">
+                                <option selected="">Open Parent Category Name</option>
+                                @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Description" class="form-label"> Description</label>
+                            <textarea id="myTextarea" name="description" class="form-control" placeholder="Leave a Description here"
+                                id="floatingTextarea"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label"> Image</label>
+                            <input type="file" name="image" id="category" class="form-control bg-dark"
+                                aria-describedby="category" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                        </div>
+                        <div class="mb-3">
+                            <img id="file-ip-1-preview">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
@@ -28,19 +49,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($categories as $item)
                             <tr class="text-center">
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $category->name }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>
                                     <form action="">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                            <a href="{{ route('products.edit', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
-                                            <a href="#" class="btn btn-primary" onclick="hit(event)">Delete
-                                            </a>
+                                            <a href="#" class="btn btn-primary" onclick="hit(event)">Delete </a>
 
-                                            <form id="delete-form" action="{{ route('categories.destroy', $category->id) }}"
+                                            <form id="delete-form" action="{{ route('products.destroy', $item->id) }}"
                                                 method="POST" class="d-none">
                                                 @method('DELETE')
                                                 @csrf
@@ -52,8 +72,6 @@
                                                     document.getElementById('delete-form').submit();
                                                 }
                                             </script>
-
-
                                         </div>
                                     </form>
                                 </td>

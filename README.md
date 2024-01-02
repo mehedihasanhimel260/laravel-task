@@ -4,7 +4,7 @@ then:<br>
 npm i<br>
 then:<br>
 cp .env.example .env<br>
-then:<br><br>
+then:<br>
 php artisan key:generate<br>
 then:<br>
 npm run dev<br>

@@ -21,15 +21,12 @@
                 class="nav-item nav-link {{ Request::routeIs('admin.home') ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ route('categories.index') }}"
-                    class="nav-item nav-link  {{ Request::routeIs('categories.index') ? 'active' : '' }}"><i
-                            class="fa fa-tachometer-alt me-2"></i>Categories</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle  " data-bs-toggle="dropdown"><i
-                        class="far fa-file-alt me-2"></i>page</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{route('categories.index')}}" class="dropdown-item ">Categories</a>
-                </div>
-            </div>
+                class="nav-item nav-link  {{ Request::routeIs('categories.index') ? 'active' : '' }}"><i
+                    class="fa fa-tachometer-alt me-2"></i>Categories</a>
+            <a href="{{ route('products.index') }}"
+                class="nav-item nav-link  {{ Request::routeIs('products.index') ? 'active' : '' }}"><i
+                    class="fa fa-tachometer-alt me-2"></i>Products</a>
         </div>
-    </nav>
+</div>
+</nav>
 </div>
